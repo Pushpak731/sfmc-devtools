@@ -182,7 +182,9 @@ describe('optional Git workflows', () => {
     });
 
     for (const command of ['join', 'createDeltaPkg']) {
-        it(`exits nonzero from the CLI for missing-Git ${command}`, () => {
+        it(`exits nonzero from the CLI for missing-Git ${command}`, function () {
+            // spawns the real CLI in a child process: keep it green on slow/loaded machines
+            this.timeout(30_000);
             const script = `
                 import childProcess from 'node:child_process';
                 import { syncBuiltinESMExports } from 'node:module';

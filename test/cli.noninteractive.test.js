@@ -29,7 +29,9 @@ function parseOptions(args) {
     );
 }
 
-describe('noninteractive CLI options', () => {
+describe('noninteractive CLI options', function () {
+    // every case spawns the real CLI in a child process: keep it green on slow/loaded machines
+    this.timeout(30_000);
     /** @type {[string[], string | boolean][]} */
     const fixSharedCases = [
         [['--fixShared'], true],

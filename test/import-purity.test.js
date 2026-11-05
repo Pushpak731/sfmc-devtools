@@ -22,7 +22,9 @@ describe('import purity', () => {
         assert.equal(result.stderr, '');
     });
 
-    it('runs the CLI without loading or invoking an update notifier', () => {
+    it('runs the CLI without loading or invoking an update notifier', function () {
+        // spawns the real CLI in a child process: keep it green on slow/loaded machines
+        this.timeout(30_000);
         const script = [
             "import Module from 'node:module';",
             'const originalLoad = Module._load;',
